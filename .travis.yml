@@ -2,5 +2,5 @@ language: cpp
 compiler: clang
 dist: trusty
 script:
-	cmake CMakeList.txt
+	- cmake CMakeList.txt
 
