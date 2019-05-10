@@ -5,6 +5,6 @@ addons:
     sonarqube: true
 
 script:
-        - cmake
+        - cmake .
         - sonar-scanner
 
