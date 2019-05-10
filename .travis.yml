@@ -6,5 +6,5 @@ addons:
 
 script:
         - cmake .
-        - sonar-scanner
+#        - sonar-scanner
 
