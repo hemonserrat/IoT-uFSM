@@ -2,10 +2,9 @@ language: cpp
 compiler: clang
 dist: trusty
 addons:
-  sonarcloud:
-     organization: "hemonserrat-github"
+    sonarqube: true
 
 script:
-	- cmake CMakeList.txt
+	- cmake
 	- sonar-scanner
 
