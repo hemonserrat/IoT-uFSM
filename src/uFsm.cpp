@@ -23,6 +23,7 @@
 #include <cassert>
 #include <list>
 #include <iostream>
+#include <cstring>
 
 #include "uEventHandler.hpp"
 #include "uFsm.hpp"
@@ -47,7 +48,7 @@ uFsm::uFsm(uEventHandler *trans, uint32_t maxNumTransitions, uint32_t initialSta
  // Initialize the array of transitions
  arrayTrans_ = 0;
  arrayTrans_ = new TransitionType[ maxNumTransitions_ ];
- memset( arrayTrans_, -1, maxNumTransitions_ * sizeof(TransitionType));
+ std::memset( arrayTrans_, -1, maxNumTransitions_ * sizeof(TransitionType));
 
 }
 
