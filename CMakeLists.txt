@@ -23,7 +23,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
-find_package(Catch2 3 REQUIRED)
+# find_package(Catch2 3 REQUIRED)
 
 # Enable testing and Catch2 test discovery
 include(CTest)
