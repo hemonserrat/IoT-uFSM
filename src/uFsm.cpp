@@ -107,7 +107,7 @@ int32_t uFsm::hash( uint32_t sourceState, uint32_t event )
  // Return negative value if the table is full
  if ( i >= maxNumTransitions_ )
     return -1;
- else  // Return free position�s index
+ else  // Return free position's index
     return ((where + i)%maxNumTransitions_) ;
 }
 
@@ -223,3 +223,4 @@ void uFsm::generateEvent( uint32_t event, void *parameters )
 {
  insertInQueue(event, parameters);
 }
+
