@@ -28,7 +28,7 @@ jobs:
         cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=Debug -S . -B build
         build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Release
     - name: SonarQube Scan
-      uses: SonarSource/sonarqube-scan-action@v4
+      uses: SonarSource/sonarqube-scan-action@v5
       env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
       with:
