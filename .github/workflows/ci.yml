@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      BUILD_WRAPPER_OUT_DIR: build_wrapper_output_directory
+    steps:
+    - uses: actions/checkout@v4
+    # - name: Install dependencies
+      # run: sudo apt-get update && sudo apt-get install -y cmake g++-11
+    - name: Configure CMake
+      run: cmake -S . -B build -DCMAKE_CXX_STANDARD=11
+    - name: Build
+      run: cmake --build build
+    - name: Run tests
+      run: ctest --test-dir build || true
+    - name: Install Build Wrapper
+      uses: SonarSource/sonarqube-scan-action/install-build-wrapper@v4
+    - name: Run Build Wrapper
+      run: |
+        cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=Debug -S . -B build
+        build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Release
+    - name: SonarQube Scan
+      uses: SonarSource/sonarqube-scan-action@v5
+      env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
+      with:
+          args: >
+            --define sonar.cfamily.compile-commands=${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json
